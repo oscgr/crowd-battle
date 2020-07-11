@@ -4,8 +4,7 @@ const RESOLUTION = 50
 const TEAM_A_COLOR = 'blue'
 const TEAM_B_COLOR = 'white'
 
-
-const mobile = window.screenX < window.screenY
+const mobile = window.innerWidth < window.innerHeight
 let grid = []
 
 
@@ -31,11 +30,13 @@ function getRelative(row, col, x, y) {
     console.log(n)
 }
 
-
+let thresold = randn_bm(0, RESOLUTION - 1, 1)
 for (let row = 0; row < RESOLUTION; row++) {
     let _row = []
+    thresold = randn_bm(0, RESOLUTION - 1, 1) < thresold ? thresold - 1 : thresold + 1
+
     for (let col = 0; col < RESOLUTION; col++) {
-        _row.push(setTeam(col))
+        _row.push(thresold < col ? TEAM_A_COLOR : TEAM_B_COLOR)
     }
     grid.push(_row)
 }
